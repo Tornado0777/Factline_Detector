@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Factline Detector",
+  "version": "1.0",
+  "description": "Analyzes article content using the Gemini API to assess credibility.",
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": "icon.png"
+  },
+  "icons": {
+    "128": "icon.png"
+  },
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ]
+}

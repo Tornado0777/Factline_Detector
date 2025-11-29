@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Factline</title>
+  <!-- NOTE: Tailwind CSS CDN is REMOVED to comply with Chrome CSP -->
+  
+  <!-- Add local styling. For simplicity and compliance, we'll embed the CSS here since we can't use the remote CDN. -->
+  <style>
+    body {
+      width: 320px;
+      min-height: 200px;
+      font-family: Arial, sans-serif;
+      background-color: #f7f9fb;
+      padding: 16px; /* p-4 equivalent */
+    }
+    #app {
+        display: flex;
+        flex-direction: column;
+        gap: 16px; /* space-y-4 equivalent */
+    }
+    h1 {
+        font-size: 1.25rem; /* text-xl equivalent */
+        font-weight: bold;
+        color: #1f2937; /* text-gray-800 equivalent */
+        display: flex;
+        align-items: center;
+    }
+    .status-box {
+      border-radius: 0.5rem;
+      padding: 1rem;
+      font-weight: 600;
+      text-align: center;
+    }
+    .status-suspicious { background-color: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+    .status-credible { background-color: #e6ffec; color: #047857; border: 1px solid #6ee7b7; }
+    .status-neutral { background-color: #fef9c3; color: #a16207; border: 1px solid #fde047; }
+    .status-loading { background-color: #dbeafe; color: #1e40af; }
+    .spinner {
+      border: 4px solid rgba(30, 64, 175, 0.3); /* blue-700/30 */
+      border-top: 4px solid #1e40af; /* blue-700 */
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: inline-block;
+      vertical-align: middle;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    #result-text {
+        font-size: 0.875rem; /* text-sm equivalent */
+        color: #374151; /* text-gray-700 equivalent */
+    }
+    #summary {
+        background-color: white;
+        padding: 0.75rem; /* p-3 equivalent */
+        border-radius: 0.5rem; /* rounded-lg equivalent */
+        box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1); /* shadow-inner equivalent */
+        font-size: 0.75rem; /* text-xs equivalent */
+    }
+    #analyze-button {
+        margin-top: 1rem; /* mt-4 equivalent */
+        background-color: #dc2626; /* bg-red-600 equivalent */
+        color: white;
+        font-weight: bold;
+        padding: 8px 16px; /* py-2 px-4 equivalent */
+        border-radius: 0.5rem; /* rounded-lg equivalent */
+        transition: background-color 0.15s;
+        box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); /* shadow-md equivalent */
+    }
+    #analyze-button:hover {
+        background-color: #b91c1c; /* hover:bg-red-700 equivalent */
+    }
+  </style>
+  
+</head>
+<body>
+  <div id="app">
+    <h1 id="title-header">
+      <svg class="w-6 h-6 mr-2 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; margin-right: 8px; color: #dc2626;">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+      </svg>
+      Factline Detector
+    </h1>
+
+    <div id="status" class="status-box status-loading flex items-center justify-center">
+      <!-- Content will be filled by popup.js -->
+    </div>
+
+    <div id="result-text" style="display: none;">
+        <p class="font-semibold mb-1" style="font-weight: 600; margin-bottom: 4px;">Summary:</p>
+        <p id="summary"></p>
+    </div>
+    
+    <button id="analyze-button" style="display: none;">
+        Re-Analyze
+    </button>
+  </div>
+  
+  <!-- Load local JavaScript files, which is CSP compliant -->
+  <script src="content_scraper.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
